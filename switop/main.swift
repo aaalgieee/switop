@@ -17,6 +17,12 @@ let SAVE_CURSOR = "\u{001B}7"
 let RESTORE_CURSOR = "\u{001B}8"
 let HIDE_CURSOR = "\u{001B}[?25l"
 let SHOW_CURSOR = "\u{001B}[?25h"
+let RED = "\u{001B}[31m"
+let BLUE = "\u{001B}[34m"
+let CYAN = "\u{001B}[36m"
+let WHITE = "\u{001B}[37m"
+let CURSOR_UP = "\u{001B}[1A"
+let CURSOR_DOWN = "\u{001B}[1B"
 
 // Constants for commands
 let powermetricsPath = "/usr/bin/powermetrics"
@@ -49,7 +55,8 @@ class ProcessRunner {
 
 // Function to format metrics
 func formatMetric(_ name: String, _ value: String) -> String {
-    return "\(BOLD)\(name): \(RESET)\(value)"
+    let padding = 30 - name.count
+    return "\(name)\(String(repeating: " ", count: max(0, padding)))│ \(value)"
 }
 
 // Function to get memory usage
@@ -145,9 +152,11 @@ func getChipInfo() -> String {
 func drawHeader() {
     print(CLEAR + HIDE_CURSOR)
     let chipInfo = getChipInfo()
-    print("\(GREEN)\(BOLD)===== System Performance Monitor =====\(RESET)")
-    print("\(GREEN)\(BOLD)\(chipInfo)\(RESET)")
-    print("Press Ctrl+C to exit\n")
+    print("\(CYAN)\(BOLD)┌────────────────────────────────────────┐\(RESET)")
+    print("\(CYAN)\(BOLD)│        System Performance Monitor      │\(RESET)")
+    print("\(CYAN)\(BOLD)└────────────────────────────────────────┘\(RESET)\n")
+    print("\(WHITE)\(BOLD)System: \(RESET)\(chipInfo)\n")
+    print("\(RED)\(BOLD)Press Ctrl+C to exit\(RESET)\n")
 }
 
 // Function to execute powermetrics command
@@ -185,8 +194,7 @@ func runPowermetrics() {
                         drawHeader()
                         
                         // CPU Usage Section
-                        print("\(YELLOW)\(BOLD)CPU Metrics:\(RESET)")
-                        
+                        print("\(YELLOW)\(BOLD)┌─── CPU Metrics " + String(repeating: "─", count: 20) + "\(RESET)")
                         // Parse E-Cluster metrics
                         if let eFreq = string.range(of: "E-Cluster HW active frequency: \\d+ MHz", options: .regularExpression),
                            let eResidency = string.range(of: "E-Cluster HW active residency:\\s+\\d+\\.\\d+%", options: .regularExpression) {
@@ -204,7 +212,7 @@ func runPowermetrics() {
                         }
                         
                         // GPU Usage Section
-                        print("\n\(YELLOW)\(BOLD)GPU Metrics:\(RESET)")
+                        print("\n\(YELLOW)\(BOLD)┌─── GPU Metrics " + String(repeating: "─", count: 20) + "\(RESET)")
                         if let gpuFreq = string.range(of: "GPU HW active frequency: \\d+ MHz", options: .regularExpression),
                            let gpuResidency = string.range(of: "GPU HW active residency:\\s+\\d+\\.\\d+%", options: .regularExpression) {
                             let frequency = String(string[gpuFreq]).split(separator: ":").last?.trimmingCharacters(in: .whitespaces) ?? "N/A"
@@ -214,12 +222,12 @@ func runPowermetrics() {
                         
                         // Memory Metrics section
                         let memoryUsage = getMemoryUsage()
-                        print("\n\(YELLOW)\(BOLD)Memory Metrics:\(RESET)")
+                        print("\n\(YELLOW)\(BOLD)┌─── Memory Metrics " + String(repeating: "─", count: 20) + "\(RESET)")
                         print(formatMetric("Memory Used", memoryUsage.memoryUsed))
                         print(formatMetric("Swap Used", memoryUsage.swapUsed))
                         
                         // Power Consumption Section
-                        print("\n\(YELLOW)\(BOLD)Power Metrics:\(RESET)")
+                        print("\n\(YELLOW)\(BOLD)┌─── Power Metrics " + String(repeating: "─", count: 20) + "\(RESET)")
                         
                         // Parse CPU Power
                         if let cpuPower = string.range(of: "CPU Power: \\d+ mW", options: .regularExpression) {

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		020DA4E92D0E1473003EF67E /* SwiftyTextTable in Frameworks */ = {isa = PBXBuildFile; productRef = 020DA4E82D0E1473003EF67E /* SwiftyTextTable */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		020DA4DB2D0DDE06003EF67E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -35,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				020DA4E92D0E1473003EF67E /* SwiftyTextTable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +82,7 @@
 			);
 			name = switop;
 			packageProductDependencies = (
+				020DA4E82D0E1473003EF67E /* SwiftyTextTable */,
 			);
 			productName = switop;
 			productReference = 020DA4DD2D0DDE06003EF67E /* switop */;
@@ -106,6 +112,9 @@
 			);
 			mainGroup = 020DA4D42D0DDE06003EF67E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				020DA4E72D0E1473003EF67E /* XCRemoteSwiftPackageReference "SwiftyTextTable" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 020DA4DE2D0DDE06003EF67E /* Products */;
 			projectDirPath = "";
@@ -285,6 +294,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		020DA4E72D0E1473003EF67E /* XCRemoteSwiftPackageReference "SwiftyTextTable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scottrhoyt/SwiftyTextTable.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		020DA4E82D0E1473003EF67E /* SwiftyTextTable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 020DA4E72D0E1473003EF67E /* XCRemoteSwiftPackageReference "SwiftyTextTable" */;
+			productName = SwiftyTextTable;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 020DA4D52D0DDE06003EF67E /* Project object */;
 }
