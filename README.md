@@ -88,3 +88,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 If you encounter any issues or have questions, please file an issue on the GitHub repository.
+
+## Others
+I did this pure out of boredom...
+Was inspired of "asitop" and wanted to recreate it using Swift. Yes, thats it... 🤷🏻‍♂️
+
+If anything breaks in your machine, aint my fault :)
